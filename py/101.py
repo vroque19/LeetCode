@@ -36,4 +36,3 @@ class Solution:
         lst.append(str(node.val) + dir)
         self.rvl(node.left, lst, 'B')
         
-        
