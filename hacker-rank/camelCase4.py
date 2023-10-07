@@ -1,13 +1,18 @@
 # Enter your code here. Read input from STDIN. Print output to STDOUT
 import sys
 
-def combine(words):
-    return "".join(word.capitalize() for word in words)
+def combine(words, data_type):
+    if data_type == "C":
+        return "".join(word.capitalize() for word in words)
+    elif data_type =="M":
+        return words[0] + "".join(word.capitalize() for word in words[1:]) + '()'
+    else:
+        return words[0] + "".join(word.capitalize() for word in words[1:])
 
-def separate(name):
+def separate(name, data_type):
     words = []
-    current_word = name[0]
-    
+    current_word = name[0].lower()
+    # BigBlueMuffin
     for char in name[1:]:
         if char.isupper():
             words.append(current_word.lower())
@@ -20,22 +25,17 @@ def separate(name):
 
 def main():
     for line in sys.stdin:
-        operation, var_type, input_str = line.split(";")
+        operation, dat_type, input_str = line.split(";")
         if operation == "S":
-            if var_type == "M":
-                result = separate(input_str[:-2])
-            else:
-                result = separate(input_str)
+            result = separate((input_str), dat_type).replace('(', "").replace(')', "")
         else:
             words = input_str.split()
-            if var_type == "M":
-                result = input_str[:1] + combine(words)[1:]
-                result += "()"
-            else:
-                result = combine(words)
+            result = combine(words, dat_type)
                 
         print(result.strip())
+        
 
         
 if __name__ == "__main__":
     main()
+
