@@ -21,11 +21,14 @@ def matchingStrings(strings, queries):
     for x in queries:
         matches = 0
         for s in strings:
+            if x not in strings:
+                break
             if x == s:
                 matches += 1
             continue
         result.append(matches)
     
+
     return result
 
 if __name__ == '__main__':
