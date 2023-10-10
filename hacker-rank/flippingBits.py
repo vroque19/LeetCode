@@ -14,33 +14,38 @@ import sys
 #
 
 def flippingBits(n):
-    to_binary = toBinary(n)
-    binary = "0"*(32-len(to_binary)) + to_binary
-    ans = ""
-    for i in range(len(binary)):
-        if binary[i] == "0":
-            ans += "1"
-        else:
-            ans += "0"
-    sol = toDecimal(ans)
-    return sol
+    bitmask = 2 ** 32 - 1
+    # XOR the number with the bitmask to flip the bits.
+    flipped = n ^ bitmask
+    return flipped
+# def flippingBits(n):
+#     to_binary = toBinary(n)
+#     binary = "0"*(32-len(to_binary)) + to_binary
+#     ans = ""
+#     for i in range(len(binary)):
+#         if binary[i] == "0":
+#             ans += "1"
+#         else:
+#             ans += "0"
+#     sol = toDecimal(ans)
+#     return sol
 
-def toDecimal(binary):
-    answer = 0
-    print(answer)
-    j = 1
-    for i in binary:
-        val = int(i)*(2**(len(binary)-j))
-        answer = int(answer) + int(val)
-        j+=1
-    return int(answer)
+# def toDecimal(binary):
+#     answer = 0
+#     print(answer)
+#     j = 1
+#     for i in binary:
+#         val = int(i)*(2**(len(binary)-j))
+#         answer = int(answer) + int(val)
+#         j+=1
+#     return int(answer)
     
-def toBinary(decimal):
-    if decimal == 0:
-        return "0"
-    if decimal == 1:
-        return "1"
-    return toBinary(decimal//2) + str(decimal % 2)
+# def toBinary(decimal):
+#     if decimal == 0:
+#         return "0"
+#     if decimal == 1:
+#         return "1"
+#     return toBinary(decimal//2) + str(decimal % 2)
         
     # Write your code here
 
