@@ -29,6 +29,7 @@ public:
 
         return new_arr;
     }
+    
     vector<int> mergeSort(vector<int>&arr) {
         std::size_t length = arr.size();
         if(length <= 1) {
