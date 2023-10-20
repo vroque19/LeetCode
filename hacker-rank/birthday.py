@@ -17,18 +17,12 @@ import sys
 #
 
 def birthday(s, d, m):
-    dict = {}
-    valid_segments = []
+    valid_segments = 0
     for i in range(len(s)-m+1):
-        dict[tuple(s[i:i+m])] = sum(s[i:i+m])
-    # print(dict)
-    for key, val in dict.items():
-        # print(key)
-        if val == d:
-            valid_segments.append(key)
-    print(f"Segments with the value '{d}': {valid_segments}")
-    
-    return len(valid_segments)
+        if sum(s[i:i+m]) == d:
+            valid_segments += 1
+
+    return valid_segments
     # Write your code here
 
 if __name__ == '__main__':
