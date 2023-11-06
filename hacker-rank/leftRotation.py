@@ -16,26 +16,16 @@ import sys
 #
 
 def rotateLeft(d, arr):
-    n = len(arr)
-    curr = 0
-    res = [0 for _ in range(n)]
-    for i in range(n-d):
-        res[i] = arr[d + i]
-        # print(res, i, d)
-        curr += 1
-    for i in range(n-curr):
-        res[curr] = arr[i]
-        curr +=1
+    half1 = arr[:d]
+    half2 = arr[d:]
+    res = half2 + half1
     return res
         
     
-    # while d > 0:
-    #     for i in range(n-1):
-    #         temp = arr[i+1]
-    #         arr[i+1] = arr[i]
-    #         arr[i] = temp
-    #     d = d - 1
-    # return arr
+    
+    
+    
+
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
