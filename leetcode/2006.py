@@ -1,15 +1,20 @@
 class Solution:
     def countKDifference(self, nums: List[int], k: int) -> int:
-        memo = [nums[0]]
-        count = 0
-        for i in range(1, len(nums)):
-            test1 = nums[i] - k
-            test2 = nums[i] + k
-            if test1 in memo or test2 in memo:
-                count += memo.count(test1)
-                count += memo.count(test2)
-            memo.append(nums[i])
-        return count
-
-
+        """
+        |nums[i]-nums[j]| == k
         
+        nums[i] == nums[j] - k
+        nums[i] == nums[j] + k
+        """
+        hmap = {}
+        count = 0
+
+        for j in nums:
+            test1 = j + k
+            test2 = j - k
+            if test1 in hmap:
+                count += hmap[test1]
+            if test2 in hmap:
+                count += hmap[test2]
+            hmap[j] = hmap.get(j, 0) + 1
+        return count
