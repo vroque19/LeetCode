@@ -43,4 +43,4 @@ function main() {
     console.log(rec.width);
     console.log(rec.perimeter);
     console.log(rec.area);
-}
+}rectangle
