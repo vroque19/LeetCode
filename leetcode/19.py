@@ -20,3 +20,4 @@ class Solution:
         second.next = second.next.next # skips the nth node
 
         return dummy.next
+
