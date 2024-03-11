@@ -3,7 +3,6 @@ class Solution:
         cntr = Counter(s)
         new = ""
         for i in range(len(order)):
-            i = i
             c = order[i]
             if c in s:
                 new+=c*cntr[c]
