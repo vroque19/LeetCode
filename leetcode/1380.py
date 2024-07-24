@@ -1,8 +1,8 @@
 class Solution:
     def luckyNumbers (self, matrix: List[List[int]]) -> List[int]:
-    # find the max of each column and store it in a dict as row:num
+    # find the max of each column and store it in a dict as col:num
     # go through each row and update the dict
-        
+    # if row_min in col_max -> lucky number
         dict_max = self.get_max_in_each_col(matrix)
         lucky_numbers = []
         for i in range(len(matrix)):
