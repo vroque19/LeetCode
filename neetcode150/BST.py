@@ -29,12 +29,6 @@ class BST:
       self.in_order_traverse(node.left)
       print(node.val, end=" ")
       self.in_order_traverse(node.right)
-      '''
-          2
-        1  5
-             10
-            6   7
-      '''
 
   def remove(self, node):
     if self.root is None:
