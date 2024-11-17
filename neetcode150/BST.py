@@ -1,3 +1,5 @@
+import icecream as ic
+
 class Node:
   def __init__(self, val=0, left=None, right=None):
     self.val = val
@@ -68,25 +70,56 @@ class BST:
         curr = curr.left
       return curr
     
-
+    
+  def isBalanced(self, root)->bool:
+    return self.balancedHelper(root)[0] # are all the subtrees balanced?
+  
+  def balancedHelper(self, node) -> list:
+     if node is None:
+        return [True, 0]
+     bal = False
+     l = self.balancedHelper(node.left)
+     r = self.balancedHelper(node.right)
+     h = 1 + max(l[1], r[1])
+     if abs(l[1] - r[1]) <=1 and l[0] and r[0]:
+        bal = True
+     return [bal, h]
+  
+     
+    # if root is None:
+    #    return True
+    # left = self.getHeight(root.left)
+    # right = self.getHeight(root.right)
+    # if abs(left-right) > 1:
+    #    return False
+    # # call isBalanced on the left and right subtrees
+    # return self.isBalanced(root.left) and self.isBalanced(root.right)
+  
+  def getHeight(self, node) -> int:
+     if node is None:
+        return 0
+     return max(self.getHeight(node.left) + 1, self.getHeight(node.right)+1)
     
 def main():
   tree = BST()
   
-  tree.insert(2)
-  tree.insert(5)
-  tree.insert(10)
+  tree.insert(3)
   tree.insert(1)
-  tree.insert(6)
-  tree.insert(7)
+  tree.insert(5)
+  tree.insert(8)
+  tree.insert(9)
+  tree.insert(4)
+  
 
 
   print("in order traversal: ")
   tree.in_order_traverse(tree.root)
   print()
-  tree.remove(1)
+  # tree.remove(1)
   print("in order traversal: ")
   tree.in_order_traverse(tree.root)
+  print("height: ", tree.getHeight(tree.root))
+  print(tree.isBalanced(tree.root))
 
 if __name__ == "__main__":
   main()
