@@ -1,4 +1,5 @@
 import icecream as ic
+from collections import deque
 
 class Node:
   def __init__(self, val=0, left=None, right=None):
@@ -85,6 +86,23 @@ class BST:
         bal = True
      return [bal, h]
   
+  def bfs(self, root):
+    queue = deque()
+    level = 0
+    if root:
+      queue.append(root)
+    while len(queue) > 0:
+      print("level: ", level)
+      for i in range(len(queue)):
+        curr = queue.popleft()
+        print(curr.val)
+        if curr.left:
+          queue.append(curr.left)
+        if curr.right:
+          queue.append(curr.right)
+      level += 1
+
+  
      
     # if root is None:
     #    return True
@@ -120,6 +138,7 @@ def main():
   tree.in_order_traverse(tree.root)
   print("height: ", tree.getHeight(tree.root))
   print(tree.isBalanced(tree.root))
+  tree.bfs(tree.root)
 
 if __name__ == "__main__":
   main()
