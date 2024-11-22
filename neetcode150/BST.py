@@ -102,6 +102,12 @@ class BST:
           queue.append(curr.right)
       level += 1
 
+  def dsf(self, root):
+     if not root:
+        return
+     print(root.left.val)
+
+     
   
      
     # if root is None:
