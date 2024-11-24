@@ -24,22 +24,20 @@ class Trie {
       }
       currNode = currNode.children[char]! // forcibly access the optional val
     }
-    if currNode.children.isEmpty {
-      currNode.isEndOfWord = true
-    }
+    currNode.isEndOfWord = true
   }
 
   func printWords() {
-    dfs(node: root)
+    let currNode: TrieNode = root
+    printWord(prefix: "", currNode: currNode)
   }
-  func dfs(node: TrieNode) {
-    for (char, childNode) in node.children {
-      if childNode.isEndOfWord {
-        print(char)
-      } else {
-        print(char, terminator: "")
-      }
-      dfs(node: childNode)
+  
+  func printWord(prefix: String, currNode: TrieNode) {
+    if currNode.isEndOfWord {
+      print(prefix)
+    }
+    for (char, childNode) in currNode.children {
+      printWord(prefix: prefix + String(char), currNode: childNode)
     }
   }
 
@@ -53,7 +51,6 @@ class Trie {
         queue.append(node)
       }
     }
-    print("completed BFS!")
   }
 
   func isPrefix(word: String) -> Bool {
@@ -72,6 +69,7 @@ class Trie {
   func isChild(node: TrieNode, currChar: Character) -> Bool {
       return node.children[currChar] != nil
   }
+
   func isWord(word: String) -> Bool  {
     var currNode = root
     for char in word {
