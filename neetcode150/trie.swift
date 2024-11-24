@@ -31,7 +31,7 @@ class Trie {
     let currNode: TrieNode = root
     printWord(prefix: "", currNode: currNode)
   }
-  
+
   func printWord(prefix: String, currNode: TrieNode) {
     if currNode.isEndOfWord {
       print(prefix)
@@ -86,16 +86,51 @@ class Trie {
     print("\"\(word)\" is not a valid word\n")
     return false
   }
+
+  func insertWords(words: [String] = []) {
+    for word in words {
+      insertWord(word: word)
+    }
+  }
+  func findWordsGivenPrefix(prefix: String) -> [String] {
+      var validWords: [String] = []
+      if !isPrefix(word: prefix) {
+          return []
+      }
+      var currNode: TrieNode = root
+      for c in prefix {
+          currNode = currNode.children[c]!
+      }
+      validWords = addValidWords(currNode: currNode, prefix: prefix)
+      print("Printing all words with prefix \"\(prefix)\"...")
+      return validWords
+  }
+
+  func addValidWords(currNode: TrieNode, prefix: String) -> [String] {
+      var words: [String] = []
+      if currNode.isEndOfWord {
+          words.append(prefix)
+      }
+      for (char, childNode) in currNode.children {
+          words += addValidWords(currNode: childNode, prefix: prefix + String(char))
+      }
+      return words
+  }
+
 }
+
+
 
 func main() {
   let prefixTree = Trie()
-  prefixTree.insertWord(word: "hey")
-  prefixTree.insertWord(word: "goodbye")
-  prefixTree.insertWord(word: "no")
-  prefixTree.insertWord(word: "good")
-  print("printing words in our trie:")
-  prefixTree.printWords()
+  let list: [String] = ["go", "and", "good", "goal", "gone", "get"]
+  prefixTree.insertWords(words: list)
+  let found = prefixTree.findWordsGivenPrefix(prefix: "go")
+  for word in found {
+    print(word)
+  }
+  
+  // prefixTree.printWords()
   print()
   var _ = prefixTree.isPrefix(word: "go")
   var _ = prefixTree.isWord(word: "go")
