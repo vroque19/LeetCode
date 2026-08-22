@@ -48,6 +48,24 @@ class SinglyLinkedList {
     int getTail() {
       return tail->val;
     }
+
+    void reverse() {
+      if(!dummy) {
+        cout << "No list to reverse\n";
+        return;
+      }
+      Node* prev = nullptr;
+      Node* curr = dummy->next;
+
+      tail = curr;
+      while(curr) {
+        Node* next = curr->next;
+        curr->next = prev;
+        prev = curr; // prev is new head
+        curr = next; // increment current
+      }
+      dummy->next = prev; // dummy must point to prev
+    }
     
 
     void insertHead(int val) {
@@ -167,5 +185,8 @@ int main() {
   mylist.get(0);
   mylist.get(4);
   mylist.get(5);
+  mylist.getVals();
+  mylist.reverse();
+  mylist.getVals();
   return 0;
 }
